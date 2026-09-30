@@ -2,7 +2,7 @@
 
 Generated 2026-10-01 from `public/`. No images were removed and no ownership is asserted.
 
-Total assets: **47** | APPROVED: **13** | CLIENT REVIEW: **34** | UNKNOWN: **0**
+Total assets: **48** | APPROVED: **13** | CLIENT REVIEW: **35** | UNKNOWN: **0**
 
 Status meaning: APPROVED = licence or client supplied asset; CLIENT REVIEW = client must confirm ownership / usage rights; UNKNOWN = source not recorded.
 
@@ -16,6 +16,7 @@ Status meaning: APPROVED = licence or client supplied asset; CLIENT REVIEW = cli
 | `favicon.svg` | 6 | metadata / browser icon | Client logo mark: aqarati-app/assets/logo/aqarati_logo_mark.svg (unaltered; raster icons generated from it) | **APPROVED** | Approved AQARATI logo supplied with the project. |
 | `images/about/about-muscat-coast.webp` | 162 | src/content/pages.ts | AI-generated property / location / business photo from the app asset set: aqarati-app/assets/location/11_Muscat_skyline_and_mountains.jpg | **CLIENT REVIEW** | AI-generated (per aqarati-app/assets/ASSET_MANIFEST.md). Ownership and usage rights not confirmed. Some files carry a small AI-tool sparkle mark. |
 | `images/about/about-old-muscat.webp` | 125 | src/content/pages.ts | AI-generated property / location / business photo from the app asset set: aqarati-app/assets/location/13_Old_Muscat_architectural_view.jpg | **CLIENT REVIEW** | AI-generated (per aqarati-app/assets/ASSET_MANIFEST.md). Ownership and usage rights not confirmed. Some files carry a small AI-tool sparkle mark. |
+| `images/about/founder-talal.webp` | 34 | src/content/founder.ts, src/content/founder.ts | Portrait of the founder supplied by the client in chat (cropped from the original; the original carries a small AI-tool mark that was cropped out) | **CLIENT REVIEW** | Client to confirm the subject consents to public use, and whether the image is a real photograph or AI-generated. Keep the neutral monogram fallback in src/components/Founder.tsx if it is withdrawn. |
 | `images/app/app-business.webp` | 60 | src/content/audiencePages.ts | Render of Figma export: Desktop/figma aqarati/31.01-business-profile.pdf | **CLIENT REVIEW** | Client-owned design, but the screens contain AI-generated photos and sample listings. Replace with device screenshots when available. |
 | `images/app/app-explore.webp` | 32 | src/content/audiencePages.ts | Render of Figma export: Desktop/figma aqarati/16.01-explore-default.pdf | **CLIENT REVIEW** | Client-owned design, but the screens contain AI-generated photos and sample listings. Replace with device screenshots when available. |
 | `images/app/app-home.webp` | 60 | src/content/audiencePages.ts, src/content/home.ts | Render of Figma export: Desktop/figma aqarati/15.03-home-personalized.pdf | **CLIENT REVIEW** | Client-owned design, but the screens contain AI-generated photos and sample listings. Replace with device screenshots when available. |
