@@ -51,3 +51,5 @@ All motion lives in `src/app/motion.css` (tokens at the top: `--motion-*`, `--ea
 
 Dark mode was removed on 2026-10-01 (light theme only).
 Founder block content: `src/content/founder.ts` (name and role only; portrait and bio empty until supplied).
+
+Image ownership / usage status for every asset: `IMAGE_RIGHTS_AUDIT.md`.

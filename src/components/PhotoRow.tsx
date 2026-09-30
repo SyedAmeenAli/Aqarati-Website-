@@ -88,7 +88,7 @@ export function PhotoRow({ photos, lang, className }: { photos: Photo[]; lang: L
               <button type="button" className="lb-btn lb-next" onClick={() => step(1)} aria-label={ctl.next[lang]}><Chev /></button>
             </>
           )}
-          <span className="lb-count" aria-live="polite">{open + 1} / {photos.length}</span>
+          <span className="lb-count" dir="ltr" aria-live="polite">{open + 1} / {photos.length}</span>
         </div>
       )}
     </>

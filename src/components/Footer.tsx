@@ -54,7 +54,7 @@ export function Footer({ lang }: { lang: Lang }) {
           </div>
         </div>
         <div className="foot-bottom">
-          <span><span className="foot-word">{site.brandName}</span> · © {year} {site.brandName.charAt(0) + site.brandName.slice(1).toLowerCase()}. {ui.rights[lang]}</span>
+          <span><bdi className="foot-word">{site.brandName}</bdi> · <bdi>© {year} {site.brandName.charAt(0) + site.brandName.slice(1).toLowerCase()}.</bdi> {ui.rights[lang]}</span>
           <span>
             <Link href={href("en", "/")} hrefLang="en" aria-current={lang === "en" ? "true" : undefined} style={{ opacity: lang === "en" ? 1 : 0.7 }}>English</Link>
             {" · "}

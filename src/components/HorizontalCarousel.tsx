@@ -17,7 +17,7 @@ export function HorizontalCarousel({ children, lang, label, className = "", desk
   const total = slides.length;
   const track = useRef<HTMLDivElement>(null);
   const [idx, setIdx] = useState(0);
-  const drag = useRef<{ x: number; left: number; moved: boolean } | null>(null);
+  const drag = useRef<{ x: number; left: number; moved: boolean; dx: number; from: number } | null>(null);
 
   const measure = useCallback(() => {
     const t = track.current;
@@ -47,22 +47,26 @@ export function HorizontalCarousel({ children, lang, label, className = "", desk
   const onDown = (e: React.PointerEvent) => {
     if (e.pointerType !== "mouse" || e.button !== 0) return;
     const t = track.current!;
-    drag.current = { x: e.clientX, left: t.scrollLeft, moved: false };
+    drag.current = { x: e.clientX, left: t.scrollLeft, moved: false, dx: 0, from: idx };
     t.classList.add("dragging");
   };
   const onMove = (e: React.PointerEvent) => {
     const d = drag.current; if (!d) return;
     const dx = e.clientX - d.x;
     if (Math.abs(dx) > 4) d.moved = true;
+    d.dx = dx;
     track.current!.scrollLeft = d.left - dx;
   };
   const onUp = () => {
     const t = track.current;
     if (!drag.current || !t) return;
+    const d = drag.current;
     drag.current = null;
     t.classList.remove("dragging");
     measure();
-    requestAnimationFrame(() => go(idxFromScroll(t)));
+    // a deliberate drag (>40px) moves one slide in the drag direction; a small one snaps to the nearest slide
+    const dir = Math.abs(d.dx) > 40 ? (d.dx < 0 ? 1 : -1) * (rtl ? -1 : 1) : 0;
+    requestAnimationFrame(() => go(dir ? d.from + dir : idxFromScroll(t)));
   };
   const idxFromScroll = (t: HTMLDivElement) => {
     const mid = t.getBoundingClientRect().left + t.clientWidth / 2;
@@ -80,7 +84,7 @@ export function HorizontalCarousel({ children, lang, label, className = "", desk
       </div>
       <div className="hcar-ctrl">
         <button type="button" className="hcar-btn" onClick={() => go(idx - 1)} disabled={idx === 0} aria-label={ctl.prev[lang]}><Arrow /></button>
-        <span className="hcar-count" aria-live="polite">{pad(idx + 1)} / {pad(total)}</span>
+        <span className="hcar-count" dir="ltr" aria-live="polite">{pad(idx + 1)} / {pad(total)}</span>
         <button type="button" className="hcar-btn next" onClick={() => go(idx + 1)} disabled={idx === total - 1} aria-label={ctl.next[lang]}><Arrow /></button>
       </div>
     </div>
