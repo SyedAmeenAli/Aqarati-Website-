@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
 import { site } from "@/config/site";
 import { megaMenu } from "@/content/motion";
-import { mobileNav, nav, ui } from "@/content/ui";
+import { mobileGroups, mobileNav, nav, ui } from "@/content/ui";
 import { href, type Lang } from "@/lib/i18n";
 import { AppLink } from "./AppLink";
 import { Arrow, Close, Menu } from "./Icons";
@@ -148,15 +148,27 @@ export function Header({ lang }: { lang: Lang }) {
             <Brand lang={lang} />
             <button className="icon-btn" onClick={closeMenu} aria-label={ui.close[lang]} type="button"><Close /></button>
           </div>
-          <nav aria-label={ui.menu[lang]}>
-            {mobileNav.map((m, i) => (
-              <Link key={m.path + i} href={i === 0 ? L("#why") : L(m.path)} className="mm-item mm-link" style={{ "--i": i + 1 } as CSSProperties}>
-                <span>{m.label[lang]}</span><Arrow className="arr" width={20} height={20} />
-              </Link>
-            ))}
+          <nav className="mm-scroll" aria-label={ui.menu[lang]}>
+            {mobileGroups.map((g, gi) => {
+              const first = g.items[0] + 1;
+              return (
+                <div key={gi} className="mm-group" role="group" aria-labelledby={`mm-g${gi}`}>
+                  <p id={`mm-g${gi}`} className="mm-label mm-item" style={{ "--i": first } as CSSProperties}>{g.label[lang]}</p>
+                  {g.items.map((k) => (
+                    <Link key={k} href={k === 0 ? L("#why") : L(mobileNav[k].path)} className="mm-item mm-link" style={{ "--i": k + 1 } as CSSProperties}>
+                      <span>{mobileNav[k].label[lang]}</span>{g.arrow && <Arrow className="arr" width={16} height={16} />}
+                    </Link>
+                  ))}
+                </div>
+              );
+            })}
           </nav>
           <div className="mm-foot">
-            <Link className="lang-link mm-item" href={switchHref} hrefLang={other} lang={other} style={{ "--i": mobileNav.length + 1 } as CSSProperties}>{lang === "en" ? "العربية" : "English"}</Link>
+            <div className="mm-seg mm-item" style={{ "--i": mobileNav.length + 1 } as CSSProperties}>
+              {(["en", "ar"] as const).map((c) => c === lang
+                ? <span key={c} className="on" aria-current="true">{c === "en" ? "EN" : "العربية"}</span>
+                : <Link key={c} href={switchHref} hrefLang={c} lang={c} aria-label={`${ui.language[lang]}: ${site.languageOptions.find((l) => l.code === c)!.name}`}>{c === "en" ? "EN" : "العربية"}</Link>)}
+            </div>
             <AppLink lang={lang} className="btn btn-red mm-item" style={{ "--i": mobileNav.length + 2 } as CSSProperties}>{ui.openAqarati[lang]} <Arrow /></AppLink>
           </div>
         </div>

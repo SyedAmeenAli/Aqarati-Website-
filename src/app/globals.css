@@ -135,7 +135,6 @@ ul, ol { padding: 0; list-style: none; }
 .mobile-menu { position: fixed; inset: 0; z-index: 150; background: var(--bg); color: var(--ink); display: flex; flex-direction: column; padding: 0 var(--gutter) 32px; transform: translateY(-12px); opacity: 0; visibility: hidden; transition: opacity 0.3s var(--ease), transform 0.3s var(--ease), visibility 0.3s; overflow-y: auto; }
 .mobile-menu.open { opacity: 1; transform: none; visibility: visible; }
 .mobile-menu .top { display: flex; align-items: center; justify-content: space-between; height: var(--header-h); }
-.mobile-menu nav a { display: block; font-family: var(--f-display); font-size: clamp(1.75rem, 7vw, 2.25rem); padding: 10px 0; border-bottom: 1px solid var(--line); font-weight: 500; }
 .mobile-menu .btn { margin-block-start: 28px; }
 
 /* ============ hero ============ */

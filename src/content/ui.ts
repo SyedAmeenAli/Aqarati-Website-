@@ -29,6 +29,14 @@ export const mobileNav: { path: string; label: T }[] = [
   { path: "/contact", label: { en: "Contact", ar: "تواصل معنا" } },
 ];
 
+/** Mobile drawer grouping. `i` indexes into `mobileNav`; `arrow` marks the audience links. */
+export const mobileGroups: { label: T; arrow?: boolean; items: number[] }[] = [
+  { label: { en: "Discover", ar: "اكتشف" }, items: [0, 1] },
+  { label: { en: "For you", ar: "لك" }, arrow: true, items: [2, 3, 4] },
+  { label: { en: "Trust", ar: "الثقة" }, items: [5, 6] },
+  { label: { en: "Company", ar: "الشركة" }, items: [7, 8, 9] },
+];
+
 export const ui = {
   openAqarati: { en: "Open Aqarati", ar: "افتح عقاراتي" } as T,
   getStarted: { en: "Get Started", ar: "ابدأ الآن" } as T,

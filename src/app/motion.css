@@ -82,23 +82,39 @@
 @media (max-width: 1039px) { .mega { display: none; } }
 
 /* ---------- 6. mobile menu: a drawer that flows in from the inline end ---------- */
-.mobile-menu { display: block; padding: 0; background: transparent; overflow: visible; opacity: 1; transform: none; visibility: hidden; pointer-events: none; transition: visibility 0s linear 900ms; }
+.mobile-menu { display: block; padding: 0; background: transparent; overflow: visible; opacity: 1; transform: none; visibility: hidden; pointer-events: none; transition: visibility 0s linear 360ms; }
 .mobile-menu.open { visibility: visible; pointer-events: auto; transition-delay: 0s; }
-.mm-backdrop { position: absolute; inset: 0; width: 100%; border: 0; padding: 0; background: rgba(22, 22, 22, 0.32); opacity: 0; transition: opacity 250ms var(--ease) 380ms; cursor: default; }
-.mobile-menu.open .mm-backdrop { opacity: 1; transition-delay: 0s; }
-.mm-panel { position: absolute; top: 0; bottom: 0; inset-inline-end: 0; width: min(92vw, 440px); display: flex; flex-direction: column; padding: 0 var(--gutter) 32px; background: var(--bg); color: var(--ink); overflow-y: auto; box-shadow: -24px 0 60px rgba(22, 22, 22, 0.14); transform: translateX(calc(100% * var(--dir))); transition: transform 480ms var(--ease) 180ms; }
+.mm-backdrop { position: absolute; inset: 0; width: 100%; border: 0; padding: 0; background: rgba(22, 22, 22, 0.24); opacity: 0; transition: opacity 300ms var(--ease); cursor: default; }
+.mobile-menu.open .mm-backdrop { opacity: 1; }
+/* compact side drawer: ~90% width, enters from the inline-end edge (right in EN, left in AR) */
+.mm-panel { position: absolute; top: 0; bottom: 0; inset-inline-end: 0; width: min(90vw, 420px); display: flex; flex-direction: column; padding: 0; background: var(--bg); color: var(--ink); overflow: hidden; border-start-start-radius: 22px; border-end-start-radius: 22px; box-shadow: -16px 0 40px rgba(22, 22, 22, 0.12); transform: translateX(calc(100% * var(--dir))); transition: transform 340ms var(--ease-premium, var(--ease)); will-change: transform; }
 .mm-panel:focus { outline: none; }
-[dir="rtl"] .mm-panel { box-shadow: 24px 0 60px rgba(22, 22, 22, 0.14); }
-.mobile-menu.open .mm-panel { transform: none; transition-delay: 80ms; transition-duration: 520ms; }
-.mm-item { opacity: 0; transform: translateX(calc(12px * var(--dir))); transition: opacity 180ms var(--ease), transform 220ms var(--ease); transition-delay: calc((var(--n, 12) - var(--i, 0)) * 16ms); }
-.mobile-menu.open .mm-item { opacity: 1; transform: none; transition-duration: 340ms, 440ms; transition-delay: calc(220ms + var(--i, 0) * 55ms); }
-.mobile-menu .mm-link { display: flex; justify-content: space-between; align-items: center; }
-.mm-link .arr { opacity: 0.4; transition: transform var(--motion-fast) var(--ease), opacity var(--motion-fast) var(--ease); }
-.mm-link:active .arr { opacity: 1; transform: translateX(calc(4px * var(--dir))); }
-[dir="rtl"] .mm-link:active .arr { transform: scaleX(-1) translateX(4px); }
-.mm-foot { display: grid; gap: 14px; margin-block-start: 24px; }
-.mm-foot .lang-link { justify-self: start; border: 1px solid var(--line-strong); }
-.mm-foot .btn { margin-block-start: 0; }
+[dir="rtl"] .mm-panel { box-shadow: 16px 0 40px rgba(22, 22, 22, 0.12); }
+.mobile-menu.open .mm-panel { transform: none; transition-duration: 480ms; }
+.mm-panel .top { flex: none; display: flex; align-items: center; justify-content: space-between; height: 68px; padding-inline: 20px 12px; border-bottom: 1px solid var(--line); }
+.mm-panel .brand { min-height: 44px; gap: 9px; }
+.mm-panel .brand img { width: 30px; animation: none; }
+.mm-panel .brand-word b { font-size: 1rem; animation: none; }
+.mm-panel .brand-word span { font-size: 0.75rem; margin-block-start: 3px; animation: none; }
+.mm-panel .icon-btn svg { width: 20px; height: 20px; }
+.mm-scroll { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 14px 0 8px; }
+.mm-group { padding-block-end: 10px; }
+.mm-group + .mm-group { border-top: 1px solid var(--line); padding-block-start: 14px; }
+.mm-label { margin: 0; padding: 0 20px 4px; font-size: 0.6875rem; line-height: 1.4; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+[dir="rtl"] .mm-label { letter-spacing: 0; font-size: 0.75rem; }
+.mobile-menu .mm-link { display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 52px; padding: 10px 20px; font-family: var(--f-display); font-size: 1.375rem; line-height: 1.2; font-weight: 600; border: 0; transition: background-color 120ms var(--ease), opacity 120ms var(--ease); }
+.mm-link:active { background: #f0ede7; opacity: 0.75; }
+.mm-link .arr { flex: none; color: var(--muted); opacity: 0.7; }
+[dir="rtl"] .mm-link .arr { transform: scaleX(-1); }
+.mm-item { opacity: 0; transform: translateX(calc(10px * var(--dir))); transition: opacity 140ms var(--ease), transform 140ms var(--ease); }
+.mobile-menu.open .mm-item { opacity: 1; transform: none; transition-duration: 280ms, 340ms; transition-delay: calc(100ms + var(--i, 0) * 30ms); }
+.mm-foot { flex: none; display: grid; gap: 12px; padding: 14px 20px calc(16px + env(safe-area-inset-bottom)); border-top: 1px solid var(--line); background: var(--bg); }
+.mm-seg { justify-self: start; display: inline-flex; border: 1px solid var(--line-strong); border-radius: 999px; padding: 2px; font-size: 0.875rem; font-weight: 600; }
+.mm-seg a, .mm-seg span { min-height: 40px; min-width: 44px; padding-inline: 14px; display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; }
+.mm-seg .on { background: var(--ink); color: var(--bg); }
+.mm-seg a { color: var(--muted); }
+.mm-foot .btn { margin: 0; min-height: 50px; width: 100%; justify-content: center; }
+@media (max-height: 640px) { .mm-label { padding-block-start: 0; } .mobile-menu .mm-link { min-height: 48px; padding-block: 8px; } .mm-foot { gap: 8px; padding-block-start: 10px; } }
 @media (min-width: 1040px) { .mobile-menu { display: none; } }
 
 /* ---------- 7. Home hero sequence: logo 100 · overline 150 · image 250 · headline 350 · lead 450 · CTAs 550/650 ---------- */
@@ -390,7 +406,7 @@
   .js .phone-enter.reveal { opacity: 1; }
   .js .reveal-img { clip-path: none; }
   .js .reveal[data-from] { transform: none; }
-  .mm-panel, .mm-item { transition-duration: 0.001ms !important; }
+  .mm-panel, .mm-item { transition-duration: 0.001ms !important; transition-delay: 0s !important; }
 }
 
 /* ---------- 26. QA fixes: tap targets, stray horizontal travel ---------- */
