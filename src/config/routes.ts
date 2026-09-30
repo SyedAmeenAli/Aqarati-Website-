@@ -1,0 +1,1 @@
+export const routes = ["/", "/about", "/how-it-works", "/for-buyers", "/for-property-owners", "/for-agents", "/for-professionals", "/for-developers", "/for-construction", "/for-design", "/verification", "/aqarati-broker", "/ecosystem", "/faq", "/contact", "/privacy", "/cookies", "/terms"];
